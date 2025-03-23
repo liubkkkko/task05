@@ -1,10 +1,8 @@
 # modules/app_service_plan/outputs.tf
-output "id" {
-  description = "The ID of the app service plan"
-  value       = azurerm_service_plan.asp.id
-}
-
-output "name" {
-  description = "The name of the app service plan"
-  value       = azurerm_service_plan.asp.name
+output "details" {
+  description = "App service plan details including id and name"
+  value = {
+    id   = azurerm_service_plan.asp.id
+    name = azurerm_service_plan.asp.name
+  }
 }

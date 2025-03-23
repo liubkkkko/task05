@@ -1,15 +1,9 @@
 # modules/resource_group/outputs.tf
-output "id" {
-  description = "The ID of the resource group"
-  value       = azurerm_resource_group.rg.id
-}
-
-output "name" {
-  description = "The name of the resource group"
-  value       = azurerm_resource_group.rg.name
-}
-
-output "location" {
-  description = "The location of the resource group"
-  value       = azurerm_resource_group.rg.location
+output "details" {
+  description = "Resource group details including id, name, and location"
+  value = {
+    id       = azurerm_resource_group.rg.id
+    name     = azurerm_resource_group.rg.name
+    location = azurerm_resource_group.rg.location
+  }
 }

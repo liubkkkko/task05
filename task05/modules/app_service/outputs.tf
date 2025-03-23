@@ -1,15 +1,9 @@
 # modules/app_service/outputs.tf
-output "id" {
-  description = "The ID of the app service"
-  value       = azurerm_windows_web_app.app.id
-}
-
-output "name" {
-  description = "The name of the app service"
-  value       = azurerm_windows_web_app.app.name
-}
-
-output "default_hostname" {
-  description = "The default hostname of the app service"
-  value       = azurerm_windows_web_app.app.default_hostname
+output "details" {
+  description = "App service details including id, name, and hostname"
+  value = {
+    id               = azurerm_windows_web_app.app.id
+    name             = azurerm_windows_web_app.app.name
+    default_hostname = azurerm_windows_web_app.app.default_hostname
+  }
 }
