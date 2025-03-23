@@ -15,8 +15,8 @@ module "app_service_plans" {
 
   source              = "./modules/app_service_plan"
   name                = each.value.name
-  resource_group_name = module.resource_groups[each.value.rg_key].name
-  location            = module.resource_groups[each.value.rg_key].location
+  resource_group_name = module.resource_groups[each.value.rg_key].details.name
+  location            = module.resource_groups[each.value.rg_key].details.location
   sku                 = each.value.sku
   worker_count        = each.value.worker_count
   tags                = var.tags
@@ -37,7 +37,7 @@ module "app_services" {
   tags                = var.tags
 }
 
-# main.tf (relevant section only)
+# Create Traffic Manager
 module "traffic_manager" {
   source              = "./modules/traffic_manager"
   name                = var.traffic_manager.name
