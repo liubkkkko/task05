@@ -1,23 +1,26 @@
 # variables.tf
 variable "resource_groups" {
+  description = "A map of resource group objects"
   type = map(object({
     name     = string
     location = string
   }))
-  description = "A map of resource group objects"
+
 }
 
 variable "app_service_plans" {
+  description = "A map of app service plan objects"
   type = map(object({
     name         = string
     sku          = string
     worker_count = number
     rg_key       = string
   }))
-  description = "A map of app service plan objects"
+
 }
 
 variable "app_services" {
+  description = "A map of app service objects"
   type = map(object({
     name               = string
     asp_key            = string
@@ -25,25 +28,24 @@ variable "app_services" {
     allow_ip_rule_name = string
     allow_tm_rule_name = string
   }))
-  description = "A map of app service objects"
 }
 
 variable "traffic_manager" {
+  description = "Traffic manager profile configuration"
   type = object({
     name           = string
     rg_key         = string
     routing_method = string
   })
-  description = "Traffic manager profile configuration"
 }
 
 variable "verification_ip" {
-  type        = string
   description = "IP address of the verification agent"
+  type        = string
 }
 
 variable "tags" {
-  type        = map(string)
   description = "Tags to be applied to all resources"
+  type        = map(string)
   default     = {}
 }
