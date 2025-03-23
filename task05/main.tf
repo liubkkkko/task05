@@ -25,7 +25,7 @@ module "app_service_plans" {
 # Create App Services
 module "app_services" {
   for_each = var.app_services
-  
+
   source              = "./modules/app_service"
   name                = each.value.name
   resource_group_name = module.resource_groups[each.value.rg_key].details.name
@@ -43,7 +43,7 @@ module "traffic_manager" {
   name                = var.traffic_manager.name
   resource_group_name = module.resource_groups[var.traffic_manager.rg_key].details.name
   routing_method      = var.traffic_manager.routing_method
-  
+
   endpoints = {
     endpoint1 = {
       name               = module.app_services["app1"].details.name
@@ -58,6 +58,6 @@ module "traffic_manager" {
       priority           = 2
     }
   }
-  
+
   tags = var.tags
 }
