@@ -19,9 +19,9 @@ variable "app_service_plans" {
 
 variable "app_services" {
   type = map(object({
-    name              = string
-    asp_key           = string
-    rg_key            = string
+    name               = string
+    asp_key            = string
+    rg_key             = string
     allow_ip_rule_name = string
     allow_tm_rule_name = string
   }))
