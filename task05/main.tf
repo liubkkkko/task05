@@ -15,8 +15,8 @@ module "app_service_plans" {
 
   source              = "./modules/app_service_plan"
   name                = each.value.name
-  resource_group_name = module.resource_groups[each.value.rg_key].details.name
-  location            = module.resource_groups[each.value.rg_key].details.location
+  resource_group_name = module.resource_groups[each.value.rg_key].resource_group_details.name
+  location            = module.resource_groups[each.value.rg_key].resource_group_details.location
   sku                 = each.value.sku
   worker_count        = each.value.worker_count
   tags                = var.tags
@@ -28,9 +28,9 @@ module "app_services" {
 
   source              = "./modules/app_service"
   name                = each.value.name
-  resource_group_name = module.resource_groups[each.value.rg_key].details.name
-  location            = module.resource_groups[each.value.rg_key].details.location
-  app_service_plan_id = module.app_service_plans[each.value.asp_key].details.id
+  resource_group_name = module.resource_groups[each.value.rg_key].resource_group_details.name
+  location            = module.resource_groups[each.value.rg_key].resource_group_details.location
+  app_service_plan_id = module.app_service_plans[each.value.asp_key].app_service_plan_details.id
   allow_ip_address    = var.verification_ip
   allow_ip_rule_name  = each.value.allow_ip_rule_name
   allow_tm_rule_name  = each.value.allow_tm_rule_name
@@ -41,19 +41,19 @@ module "app_services" {
 module "traffic_manager" {
   source              = "./modules/traffic_manager"
   name                = var.traffic_manager.name
-  resource_group_name = module.resource_groups[var.traffic_manager.rg_key].details.name
+  resource_group_name = module.resource_groups[var.traffic_manager.rg_key].resource_group_details.name
   routing_method      = var.traffic_manager.routing_method
 
   endpoints = {
     endpoint1 = {
-      name               = module.app_services["app1"].details.name
-      target_resource_id = module.app_services["app1"].details.id
+      name               = module.app_services["app1"].app_service_details.name
+      target_resource_id = module.app_services["app1"].app_service_details.id
       weight             = 100
       priority           = 1
     },
     endpoint2 = {
-      name               = module.app_services["app2"].details.name
-      target_resource_id = module.app_services["app2"].details.id
+      name               = module.app_services["app2"].app_service_details.name
+      target_resource_id = module.app_services["app2"].app_service_details.id
       weight             = 100
       priority           = 2
     }

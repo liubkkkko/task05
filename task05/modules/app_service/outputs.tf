@@ -1,5 +1,5 @@
 # modules/app_service/outputs.tf
-output "details" {
+output "app_service_details" {
   description = "App service details including id, name, and hostname"
   value = {
     id               = azurerm_windows_web_app.app.id

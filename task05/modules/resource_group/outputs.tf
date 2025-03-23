@@ -1,5 +1,5 @@
 # modules/resource_group/outputs.tf
-output "details" {
+output "resource_group_details" {
   description = "Resource group details including id, name, and location"
   value = {
     id       = azurerm_resource_group.rg.id
